@@ -1,14 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { Draggable} from 'react-beautiful-dnd'
+
 const LyricLists = props => {
-  const { track } = props;
+  const { track, index } = props;
 
 
   return (
-    <div className="col-md-6">
-      <div className="card mb-4 shadow-sm">
-        <div className="card-body">
+
+    <Draggable  draggableId={track.track_id} index={index} >
+      {(provided) => (
+      <div className="col-md-6"ref= {provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}  >
+      <div className="card mb-4 shadow-sm"draggable>
+        <div className="card-body" draggable>
           <h5>{track.artist_name}</h5>
           <p className="card-text">
             <strong>
@@ -30,7 +37,16 @@ const LyricLists = props => {
         </div>
       </div>
     </div>
+                      
+      )}
+    
+    
+    </Draggable>
   );
 };
 
+
+
 export default LyricLists;
+
+
