@@ -14,8 +14,8 @@ const LyricLists = props => {
       <div className="col-md-6"ref= {provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}  >
-      <div className="card mb-4 shadow-sm"draggable>
-        <div className="card-body" draggable>
+      <div className="card mb-4 shadow-sm">
+        <div className="card-body" >
           <h5>{track.artist_name}</h5>
           <p className="card-text">
             <strong>
