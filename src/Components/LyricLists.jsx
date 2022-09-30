@@ -1,21 +1,42 @@
-import React from 'react';
+import React, { useRef, useContext } from 'react';
 import { Link } from 'react-router-dom';
-
-import { Draggable} from 'react-beautiful-dnd'
+import { Context} from './Context'
 
 const LyricLists = props => {
   const { track, index } = props;
+  const [state, setState] = useContext(Context);
+  const { track_list } = state;
 
 
-  return (
 
-    <Draggable  draggableId={track.track_id} index={index} >
-      {(provided) => (
-      <div className="col-md-6"ref= {provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}  >
-      <div className="card mb-4 shadow-sm"draggable>
-        <div className="card-body" draggable>
+  const dragItem = useRef(null)
+  const dragOverItem = useRef(null)
+
+ 
+
+  const handleSort = () =>{
+    let songs = [...track_list]
+
+    const dragcontent = songs.splice(dragItem.current, 1)
+
+    songs.splice(dragOverItem.current, 0, dragcontent)
+
+    dragItem.current = null
+    dragOverItem.current = null
+
+    setState(songs)
+  }
+
+
+  return (  
+      <div className="col-md-6" draggable 
+      onDragStart={(e) =>dragItem.current=index}
+      onDragEnter={(e) =>dragOverItem.current=index}
+      onDragEnd={handleSort}
+      
+      >
+      <div className="card mb-4 shadow-sm">
+        <div className="card-body" >
           <h5>{track.artist_name}</h5>
           <p className="card-text">
             <strong>
@@ -38,10 +59,7 @@ const LyricLists = props => {
       </div>
     </div>
                       
-      )}
     
-    
-    </Draggable>
   );
 };
 
