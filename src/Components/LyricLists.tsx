@@ -3,19 +3,24 @@ import { Link } from 'react-router-dom';
 
 import { Draggable} from 'react-beautiful-dnd'
 
-const LyricLists = props => {
-  const { track, index } = props;
+interface props {
+  track: any;
+  index:number
+}
 
-
+const LyricLists: React.FC<props> = ({
+ track,
+ index,
+}) => {
   return (
 
     <Draggable  draggableId={track.track_id} index={index} >
       {(provided) => (
       <div className="col-md-6"ref= {provided.innerRef}
           {...provided.draggableProps}
-          {...provided.dragHandleProps}  >
+          {...provided.dragHandleProps} draggable >
       <div className="card mb-4 shadow-sm">
-        <div className="card-body" >
+        <div className="card-body" draggable >
           <h5>{track.artist_name}</h5>
           <p className="card-text">
             <strong>

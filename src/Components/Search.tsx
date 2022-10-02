@@ -3,7 +3,8 @@ import axios from 'axios';
 import { Context } from "./Context";
 
 const Search = () => {
-  const [state, setState] = useContext(Context);
+  const ctxt = useContext(Context)
+  const [state, setState]:{} | any = ctxt;
   const [userInput, setUserInput] = useState("");
   const [trackTitle, setTrackTitle] = useState("");
 
@@ -20,12 +21,12 @@ const Search = () => {
       })
       .catch(err => console.log(err));
   }, [trackTitle]);
-  const findTrack = e => {
+  const findTrack = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setTrackTitle(userInput);
   };
 
-  const onChange = e => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
   };
 
@@ -35,7 +36,7 @@ const Search = () => {
         <i className="fas fa-music" /> Search For Lyrics
       </h1>
       <p className="lead text-center">Get the lyrics for any song</p>
-      <form onSubmit={findTrack}>
+      <form onSubmit={(e) =>findTrack(e)}>
         <div className="form-group">
           <input
             type="text"

@@ -3,9 +3,10 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 //import Moment from "react-moment";
 
-const Lyric = props => {
-  const [track, setTrack] = useState({});
-  const [lyrics, setLyrics] = useState({});
+
+const Lyric = () => {
+  const [track, setTrack] = useState<any>([]);
+  const [lyrics, setLyrics] =useState<any>([]);
   const params = useParams();
 
   useEffect(() => {
